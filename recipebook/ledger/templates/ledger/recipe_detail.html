@@ -1,0 +1,21 @@
+{% extends "ledger/base.html" %}
+{% block title %}Recipe Book{% endblock %}
+
+{% block content %}
+
+<form method="POST" action="{% url 'logout' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Logout</button>
+</form>
+
+<h1>{{ recipe.name }}</h1>
+
+<ul>
+    {% for ingredient in recipe.ingredients.all %}
+        <li>{{ ingredient.ingredient.name }}: {{ ingredient.quantity }}</li> 
+    {% endfor %}
+</ul>
+
+<a href="{% url 'recipe_list' %}">Back to all recipes</a> {# Correct URL name #}
+{% endblock %}
