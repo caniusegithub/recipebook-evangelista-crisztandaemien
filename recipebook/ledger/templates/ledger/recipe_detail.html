@@ -1,5 +1,5 @@
 {% extends "ledger/base.html" %}
-{% block title %}Recipe Book{% endblock %}
+{% block title %}{{ recipe.name }} - Recipe Book{% endblock %}
 
 {% block content %}
 
@@ -9,7 +9,20 @@
     <button type="submit">Logout</button>
 </form>
 
+<a href="{% url 'add_recipe_image' recipe.id %}">Upload image</a>
+
 <h1>{{ recipe.name }}</h1>
+<h2>by {{recipe.author}} </h2>
+
+<!-- IMAGE IN RECIPE -->
+
+{% if recipe.images.all %}
+    {% for image in recipe.images.all %}
+        <img src="{{ image.image.url }}" alt="{{ image.description }}">
+    {% endfor %}
+{% else %}
+    <p>no images</p>
+{% endif %}
 
 <ul>
     {% for ingredient in recipe.ingredients.all %}

@@ -1,0 +1,11 @@
+{% extends "ledger/base.html" %}
+{% block title %}Recipe Book{% endblock %}
+
+{% block content %}
+<form method="post">
+{% csrf_token %}
+{{ recipeform.as_p }}
+{{ ingredientform.as_p }}
+<input type="submit" value="Submit">
+</form>
+{% endblock %}
